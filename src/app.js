@@ -2,8 +2,16 @@ const express = require("express");
 
 const app = express();
 
-app.use((req, res) => {
-  res.send("Hello from Server");
+app.get("/user", (req, res) => {
+  res.send({ name: "Manmeet Rai" });
+});
+
+app.post("/user", (req, res) => {
+  res.send("Hello from user");
+});
+
+app.use("/test", (req, res) => {
+  res.send("Hello from test");
 });
 
 app.listen(7777, () => {
