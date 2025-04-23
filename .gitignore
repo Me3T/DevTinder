@@ -6,6 +6,7 @@ yarn-error.log*
 
 # Logs
 logs/
+database.js
 *.log
 *.log.*
 
@@ -50,3 +51,4 @@ coverage/
 *.pid
 *.seed
 *.pid.lock
+src/config/database.js
