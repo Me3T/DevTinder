@@ -73,7 +73,7 @@ app.patch("/user/:userId", async (req, res) => {
     }
 
     if (data?.skills.length > 10) {
-      throw new Error("Skills cannot be greater then 10");
+      throw new Error("Please enter only 10 skills");
     }
 
     const user = await User.findByIdAndUpdate({ _id: userId }, data, {
