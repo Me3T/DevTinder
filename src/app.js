@@ -48,14 +48,11 @@ app.post("/login", async (req, res) => {
       throw new Error("Invalid Credentials");
     }
 
-    const passwordCheck = await bcrypt.compare(password, user.password);
+    const passwordCheck = await user.validatePassword(password);
 
     if (passwordCheck) {
-      //* Create a JWT Token
+      const token = await user.getJWT();
 
-      const token = await jwt.sign({ _id: user._id }, "Me3t@1998");
-
-      //* Add the token to cookie and send the response back to user
       res.cookie("token", token);
 
       res.send("Login Successful !!");
@@ -74,76 +71,6 @@ app.get("/profile", userAuth, async (req, res) => {
     res.send(user);
   } catch (error) {
     res.status(400).send("Error Logging In" + error.message);
-  }
-});
-
-app.get("/user", async (req, res) => {
-  const userEmail = req.body.emailId;
-  try {
-    const user = await User.findOne({ emailId: userEmail });
-    if (!user) {
-      res.status(404).send("User not found");
-    } else {
-      res.send(user);
-    }
-  } catch (error) {
-    res.status(404).send("Email not found");
-  }
-});
-
-app.get("/feed", async (req, res) => {
-  try {
-    const users = await User.find({});
-    res.send(users);
-  } catch (err) {
-    res.status(404).send("User not found");
-  }
-});
-
-app.delete("/delete", async (req, res) => {
-  const userId = req.body.userId;
-
-  try {
-    const deluser = await User.findByIdAndDelete(userId);
-    res.send("deleted successfully");
-  } catch (err) {
-    res.status(404).send("error deleting user");
-  }
-});
-
-app.patch("/user/:userId", async (req, res) => {
-  const userId = req.params?.userId;
-  const data = req.body;
-
-  try {
-    const ALLOWED_UPDATES = [
-      "userId",
-      "photoUrl",
-      "about",
-      "gender",
-      "age",
-      "skills",
-    ];
-
-    const isUpdateAllowed = Object.keys(data).every((k) =>
-      ALLOWED_UPDATES.includes(k)
-    );
-    if (!isUpdateAllowed) {
-      throw new Error("Update not allowed");
-    }
-
-    if (data?.skills.length > 10) {
-      throw new Error("Please enter only 10 skills");
-    }
-
-    const user = await User.findByIdAndUpdate({ _id: userId }, data, {
-      returnDocument: "after",
-      runValidators: true,
-    });
-    console.log(user);
-    res.send("User updated");
-  } catch (err) {
-    res.status(400).send("Update Failed:" + err.message);
   }
 });
 
