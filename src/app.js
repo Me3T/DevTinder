@@ -82,5 +82,5 @@ connectDB()
     });
   })
   .catch((err) => {
-    console.log("connection not established");
+    console.log("Connection not Established");
   });
