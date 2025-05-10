@@ -6,7 +6,7 @@ const requestRouter = express.Router();
 requestRouter.post("/sendConnectionRequest", async (req, res) => {
   const user = req.user;
 
-  console.log("Sending a connection request");
+  console.log("Sending a Connection Request");
 
   res.send(user.firstName + "Connection request was sent");
 });
