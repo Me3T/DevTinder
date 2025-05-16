@@ -53,7 +53,7 @@ authRouter.post("/login", async (req, res) => {
         expires: expiryDate,
       });
 
-      res.send("Login Successful !!");
+      res.send("Login Successfull !!");
     } else {
       throw new Error("Invalid Credentials");
     }
