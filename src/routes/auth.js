@@ -28,7 +28,7 @@ authRouter.post("/signup", async (req, res) => {
     await user.save();
     res.send("User Added");
   } catch (error) {
-    res.status(400).send("Error saving the user" + error.message);
+    res.status(400).send("Error saving the User" + error.message);
   }
 });
 
@@ -58,7 +58,9 @@ authRouter.post("/login", async (req, res) => {
       throw new Error("Invalid Credentials");
     }
   } catch (error) {
-    res.status(400).send("Error Logging In Please check credentials" + error.message);
+    res
+      .status(400)
+      .send("Error Logging In Please check credentials" + error.message);
   }
 });
 
