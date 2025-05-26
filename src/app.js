@@ -20,7 +20,7 @@ connectDB()
   .then(() => {
     console.log("Connection Established");
     app.listen(7777, () => {
-      console.log("Server is Running");
+      console.log("Server is Running on port 7777");
     });
   })
   .catch((err) => {
