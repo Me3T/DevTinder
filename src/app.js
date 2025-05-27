@@ -24,5 +24,5 @@ connectDB()
     });
   })
   .catch((err) => {
-    console.log("Connection not Established");
+    console.log("Connection Failed", err);
   });
