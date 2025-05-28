@@ -60,7 +60,7 @@ authRouter.post("/login", async (req, res) => {
   } catch (error) {
     res
       .status(400)
-      .send("Error Logging In Please check credentials" + error.message);
+      .send("Error Logging in Please check credentials" + error.message);
   }
 });
 
