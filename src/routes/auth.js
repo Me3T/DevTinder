@@ -55,7 +55,7 @@ authRouter.post("/login", async (req, res) => {
 
       res.send("Login Successfull !!");
     } else {
-      throw new Error("Invalid Credentials");
+      throw new Error("Invalid Password");
     }
   } catch (error) {
     res
